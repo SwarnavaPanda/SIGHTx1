@@ -2,7 +2,7 @@ import cv2
 import os
 import numpy as np
 
-def convert_tiff_to_jpg(input_path, output_path="output/converted_image.jpg"):
+def convert_tiff_to_jpg(input_path, output_path="static/converted_image.jpg"):
     # Load the TIFF image
     image = cv2.imread(input_path, cv2.IMREAD_COLOR)
     if image is None:

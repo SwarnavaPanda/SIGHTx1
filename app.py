@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import adjusted_rand_score, normalized_mutual_info_score
 from original_out import convert_tiff_to_jpg
 from totalPixel import get_total_pixels
+from PIL import Image
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
