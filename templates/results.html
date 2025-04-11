@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segmentation Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+            text-align: center;
+        }
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .image-box {
+            text-align: center;
+            margin: 10px;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .image-box img {
+            max-width: 300px;
+            max-height: 300px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+            background-color: white;
+        }
+        .metrics {
+            background-color: #e7f3fe;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        .explanation {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+            border-left: 4px solid #4CAF50;
+        }
+        .back-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #2196F3;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .back-btn:hover {
+            background-color: #0b7dda;
+        }
+        .best-method {
+            background-color: #dff0d8;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .method-name {
+            font-weight: bold;
+            color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Segmentation Results</h1>
+        
+        <div class="best-method">
+            <h2>Best Performing Method: <span class="method-name">{{ best_method|title }}</span></h2>
+        </div>
+
+        <div class="image-container">
+            <div class="image-box">
+                <h3>Original Image</h3>
+                <img src="{{ url_for('static', filename=original_image) }}" alt="Original Image">
+            </div>
+            <div class="image-box">
+                <h3>Best Segmentation Result</h3>
+                <img src="{{ url_for('static', filename='best_result.jpg') }}" alt="Best Segmentation">
+            </div>
+        </div>
+
+        <h3>All Segmentation Results</h3>
+        <div class="image-container">
+            <div class="image-box">
+                <h3>K-means Clustering</h3>
+                <img src="{{ url_for('static', filename=result_filenames['kmeans']) }}" alt="K-means Result">
+            </div>
+            <div class="image-box">
+                <h3>Multi-Otsu Thresholding</h3>
+                <img src="{{ url_for('static', filename=result_filenames['multi_otsu']) }}" alt="Multi-Otsu Result">
+            </div>
+            <div class="image-box">
+                <h3>Normal Thresholding</h3>
+                <img src="{{ url_for('static', filename=result_filenames['normal_threshold']) }}" alt="Normal Threshold Result">
+            </div>
+        </div>
+
+        <div class="metrics">
+            <h3>Performance Metrics</h3>
+            <ul>
+                <li>Adjusted Rand Index: {{ metrics.adjusted_rand_index|round(4) }}</li>
+                <li>Normalized Mutual Information: {{ metrics.normalized_mutual_info|round(4) }}</li>
+            </ul>
+        </div>
+
+        <div class="explanation">
+            <h3>Why This Method Was Chosen</h3>
+            <p>{{ explanation }}</p>
+        </div>
+
+        <a href="/" class="back-btn">Process Another Image</a>
+    </div>
+</body>
+</html> 
