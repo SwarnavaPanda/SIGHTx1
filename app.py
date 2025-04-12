@@ -79,9 +79,9 @@ def upload_file():
         
         Total_p=get_total_pixels(filepath)
         
-        if(Total_p>512*512):
+        if(Total_p>256*256):
             img = Image.open(filepath)
-            img = img.resize((512, 512))
+            img = img.resize((256, 256))
             img.save(filepath)
         
         #convert_tiff_to_jpg(filepath, output_path="output\converted_image.jpg")
