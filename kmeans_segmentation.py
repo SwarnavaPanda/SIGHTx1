@@ -77,7 +77,7 @@ def kmeans_segmentation(image_path, n_clusters=3):
     pixels = image.reshape(-1, 1)
     
     # Apply K-means clustering with explicit n_init
-    kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init='auto')  # <-- updated
+    kmeans = KMeans(n_clusters=2, random_state=42, n_init=5, max_iter=100) # <-- updated
     labels = kmeans.fit_predict(pixels)
     
     # Reshape the labels back to the original image shape
