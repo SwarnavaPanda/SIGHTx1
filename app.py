@@ -14,6 +14,7 @@ from totalPixel import get_total_pixels
 from PIL import Image
 
 app = Flask(__name__)
+app.secret_key = 'super_secret_key_123'  # you can change this to anything random
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['STATIC_FOLDER'] = 'static'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
@@ -76,6 +77,17 @@ def upload_file():
         filename = secure_filename(file.filename)
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
+
+        try:
+            img = Image.open(filepath)
+            width, height = img.size
+
+            if width > 100 or height > 100:
+                flash('⚠️ Please upload an image smaller than 100 x 100 pixels.')
+                return redirect(url_for('index'))
+        except Exception as e:
+            flash(f"Error reading image: {e}")
+            return redirect(url_for('index'))
         
         Total_p=get_total_pixels(filepath)
         
