@@ -70,6 +70,17 @@
         </div>
         <form class="upload-form" action="/upload" method="post" enctype="multipart/form-data">
             <input type="file" name="file" class="file-input" accept="image/*" required>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                    {% for message in messages %}
+                        <li style="color: red;">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+
+            
             <button type="submit" class="submit-btn">Process Image</button>
         </form>
     </div>
