@@ -13,7 +13,7 @@ from original_out import convert_tiff_to_jpg
 from totalPixel import get_total_pixels
 from PIL import Image
 app = Flask(__name__)
-app.secret_key = os.environ.get('FLASK_SECRET_KEY') #'super_secret_key_123'  # you can change this to anything random
+app.secret_key = 'super_secret_key_123' #os.environ.get('FLASK_SECRET_KEY') #'super_secret_key_123'  # you can change this to anything random
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['STATIC_FOLDER'] = 'static'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
